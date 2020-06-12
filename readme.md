@@ -1,0 +1,1 @@
+This is a test app for Thinkful's Web Dev course
