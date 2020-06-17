@@ -16,11 +16,11 @@ header {
 .quiz-box {
     background: teal;
     color: white;
-    height: 200px;
     width: 500px;
     padding-top: 20px;
     padding-left: 50px;
     padding-right: 50px;
+    padding-bottom: 30px;
     border: 2px solid black;
     border-radius: 5px;
 }
@@ -28,9 +28,30 @@ header {
 button {
     background: orange;
     color: black;
+    margin-top: 15px;
     padding-top: 5px;
     padding-left: 20px;
     padding-right: 20px;
     padding-bottom: 5px;
     border-radius: 5px;
+}
+
+.correct {
+    background: aliceblue;
+    border: 4px solid greenyellow;
+    color: black;
+    border-radius: 5px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 10px;
+}
+
+.incorrect {
+    background: aliceblue;
+    border: 4px solid darkred;
+    color: black;
+    border-radius: 5px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 10px;
 }

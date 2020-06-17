@@ -1,7 +1,7 @@
-const STORE {
+const STORE = {
     questions: [
         {
-            id: cuid(),
+            currentQuestion: 1,
             question: "What was the first adult/collegiate competitive team in the modern-day Community circuit?",
             options: [
                 "Project D",
@@ -13,7 +13,7 @@ const STORE {
             answer: "Rhythmology",
         },
         {
-            id: cuid(),
+            currentQuestion: 2,
             question: "Which NYC team began as an NYU club affiliate, before transforming into one of the leaders of the tri-state Community?",
             options: [
                 "Mint Dance Company",
@@ -25,7 +25,7 @@ const STORE {
             answer: "EPIC Motion",
         },
         {
-            id: cuid(),
+            currentQuestion: 3,
             question: "In what year did Boston-based juggernaut Phunk Phenomenon appear on America’s Best Dance Crew?",
             options: [
                 "2008",
@@ -37,7 +37,7 @@ const STORE {
             answer: "2011",
         },
         {
-            id: cuid(),
+            currentQuestion: 4,
             question: "What name did Rhythmology change to, when they became the subject of a legal dispute over their official title?",
             options: [
                 "ARC",
@@ -49,7 +49,7 @@ const STORE {
             answer: "ARC",
         },
         {
-            id: cuid(),
+            currentQuestion: 5,
             question: "Which DC-based team has won multiple 1st Place titles at Boston’s Elements Dance Competition?",
             options: [
                 "Capital Funk",
@@ -61,6 +61,8 @@ const STORE {
             answer: "Capital Funk",
         },
     ],
-    currentQuestion: 0;
-    score: 0;
+    score: 0,
 }
+
+//an array of objects
+const questionSet = STORE.questions;
