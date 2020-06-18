@@ -1,3 +1,5 @@
+let i = 0;
+
 function beginQuiz() {
     $('#begin').on('click', function(event) {
         generateQuestions();
@@ -5,7 +7,8 @@ function beginQuiz() {
     console.log('beginQuiz has ran');
 };
 
-let i = 0;
+
+
 
 function updateQuizQuestionAndOptions() {
         $('.js-question').append(`${questionSet[i].question}`);
@@ -21,9 +24,16 @@ function updateQuizQuestionAndOptions() {
 
 
 function generateQuestions() {
+    $('.quiz-title').html(`
+        <h1>Dance Community Quiz</h1>
+            <div id="questionNumAndScore">
+                <h2 class="questionNum">Question: ${currentQuestion}/5</h2>
+                <h2 class="score">Score: ${currentScore}/5</h2>
+            </div>
+`)
     $('.quiz-box').html(`
         <form id="js-questions">
-            <h2 class="js-question"></h2>
+            <h3 class="js-question"></h3>
             <div class="row-question">
                  <input type="radio" name="pick-one" value="${questionSet[i].options[0]}">
                      <label class="optionOne"></label>
@@ -55,37 +65,77 @@ function generateQuestions() {
     console.log('generateQuestion has run');
 };
 
+
+
+
 function handleQuizQuestions() {
     $('.quiz-box').on('click','#next', function(event) {
-        generateQuestions();
-        console.log('handleQuizQuestions has ran');
+        currentQuestion-1 === questionSet.length ? showResults() : generateQuestions();
     });
+        console.log('handleQuizQuestions has ran');
 };
+
+
+
 
 function validateQuizAnswer() {
     $('.quiz-box').on('submit', '#js-questions', function(event) {
         event.preventDefault();
+        if (!$("input[name=pick-one]:checked").val()) {
+            alert("Please select an answer");
+            return;
+        }
         if ($("input[name=pick-one]:checked").val() === questionSet[i-1].answer) {
             $("input[name=pick-one]:checked").parent().append(`<p class="correct">Correct!</p>`)
+            $('input').not(':checked').parent().find('p').remove();
         }
         else {
-            $("input[name=options]:checked").parent().append(`<p class="incorrect">Sorry, the correct answer is ${questionSet[i-1].answer}</p>`)
+            $("input[name=pick-one]:checked").parent().append(`<p class="incorrect">Sorry, the correct answer is ${questionSet[i-1].answer}</p>`)
+            $('input').not(':checked').parent().find('p').remove();
         }
-
+        $('#next').show();
+        $('#validate').hide();
+        updateQuizScore();
     });
     console.log('validateQuizAnswer has ran')
 
 };
 
 function updateQuizScore() {
-
-
+    if ($("input[name=pick-one]:checked").val() === questionSet[i-1].answer) {
+        currentQuestion++;
+        currentScore++;
+        return currentQuestion;
+        return currentScore;
+    }
+    else {
+        currentQuestion++;
+    }
+    console.log('updateQuizScore has ran')
 };
 
-function fQuizScore() {
-
-
+function showResults() {
+    $('.quiz-title').html(`
+        <h1>Dance Community Quiz</h1>
+    `)
+    $('.quiz-box').html(`
+        <legend>Congratulations on completing this quiz!</legend>
+            <p>Your final score was ${currentScore}/5</p>
+                <div class="submit-button">
+                    <button type="button" id="restart">Try Again</button>
+                </div>
+    `);
+    currentQuestion = 1;
+    currentScore = 0;
+    i = 0;
 };
+
+
+function restartQuiz() {
+    $('.quiz-box').on('click','#restart', function(event) {
+      generateQuestions();
+    });
+  };
 
 
 
@@ -93,6 +143,7 @@ function runQuiz() {
     beginQuiz();
     handleQuizQuestions();
     validateQuizAnswer();
+    restartQuiz();
 };
 
 runQuiz();

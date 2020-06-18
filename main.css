@@ -5,6 +5,7 @@
 body {
     background-color: rgba(153, 186, 214, 0.89);
     color: black;
+    font-family: sans-serif;
     margin: 0;
 }
 
@@ -16,7 +17,9 @@ header {
 .quiz-box {
     background: teal;
     color: white;
-    width: 500px;
+    width: 90%;
+    margin: auto;
+    min-height: 200px;
     padding-top: 20px;
     padding-left: 50px;
     padding-right: 50px;
@@ -55,3 +58,10 @@ button {
     margin-bottom: 10px;
     padding: 10px;
 }
+
+
+#questionNumAndScore {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+  }
