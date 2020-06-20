@@ -35,24 +35,24 @@ function generateQuestions() {
         <form id="js-questions">
             <h3 class="js-question"></h3>
             <div class="row-question">
-                 <input type="radio" name="pick-one" value="${questionSet[i].options[0]}">
-                     <label class="optionOne"></label>
+                 <input type="radio" id="${questionSet[i].options[0]}" name="pick-one" value="${questionSet[i].options[0]}">
+                     <label for="${questionSet[i].options[0]}" class="optionOne"></label>
             </div>
             <div class="row-question">
-                <input type="radio" name="pick-one" value="${questionSet[i].options[1]}">
-                     <label class="optionTwo"></label>
+                <input type="radio" id="${questionSet[i].options[1]}" name="pick-one" value="${questionSet[i].options[1]}">
+                     <label for="${questionSet[i].options[1]}" class="optionTwo"></label>
             </div>
             <div class="row-question">
-             <input type="radio" name="pick-one" value="${questionSet[i].options[2]}">
-                <label class="optionThree"></label>
+             <input type="radio" id="${questionSet[i].options[2]}" name="pick-one" value="${questionSet[i].options[2]}">
+                <label for="${questionSet[i].options[2]}" class="optionThree"></label>
             </div>
             <div class="row-question">
-             <input type="radio" name="pick-one" value="${questionSet[i].options[3]}">
-                <label class="optionFour"></label>
+             <input type="radio" id="${questionSet[i].options[3]}" name="pick-one" value="${questionSet[i].options[3]}">
+                <label for="${questionSet[i].options[3]}" class="optionFour"></label>
             </div>
             <div class="row-question">
-             <input type="radio" name="pick-one" value="${questionSet[i].options[4]}">
-                <label class="optionFive"></label>
+             <input type="radio" id="${questionSet[i].options[4]}" name="pick-one" value="${questionSet[i].options[4]}">
+                <label for="${questionSet[i].options[4]}" class="optionFive"></label>
             </div>
             <div class="submit-button">
                 <button type="submit" id="validate">Submit</button>
@@ -76,22 +76,27 @@ function handleQuizQuestions() {
 };
 
 
+function addValidationMsg(aString) {
+    $("input[name=pick-one]:checked").parent().append(aString)
+    $('input').not(':checked').parent().find('p').remove();
+};
 
 
 function validateQuizAnswer() {
     $('.quiz-box').on('submit', '#js-questions', function(event) {
         event.preventDefault();
+        let msg;
         if (!$("input[name=pick-one]:checked").val()) {
             alert("Please select an answer");
             return;
         }
         if ($("input[name=pick-one]:checked").val() === questionSet[i-1].answer) {
-            $("input[name=pick-one]:checked").parent().append(`<p class="correct">Correct!</p>`)
-            $('input').not(':checked').parent().find('p').remove();
+            msg= `<p class="correct">Correct!</p>`
+            addValidationMsg(msg);
         }
         else {
-            $("input[name=pick-one]:checked").parent().append(`<p class="incorrect">Sorry, the correct answer is ${questionSet[i-1].answer}</p>`)
-            $('input').not(':checked').parent().find('p').remove();
+            msg= `<p class="incorrect">Sorry, the correct answer is ${questionSet[i-1].answer}</p>`
+            addValidationMsg(msg);
         }
         $('#next').show();
         $('#validate').hide();
@@ -100,6 +105,7 @@ function validateQuizAnswer() {
     console.log('validateQuizAnswer has ran')
 
 };
+
 
 function updateQuizScore() {
     if ($("input[name=pick-one]:checked").val() === questionSet[i-1].answer) {
