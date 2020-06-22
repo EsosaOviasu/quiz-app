@@ -86,12 +86,16 @@ function rejectMessage() {
     return `<p class="incorrect">Sorry, the correct answer is ${questionSet[i-1].answer}</p>`
 };
 
+function alertMessage() {
+    return "Please select an answer"
+};
+
 function validateQuizAnswer() {
     $('.quiz-box').on('submit', '#js-questions', function(event) {
         event.preventDefault();
         let msg;
         if (!$("input[name=pick-one]:checked").val()) {
-            alert("Please select an answer");
+            alert(alertMessage());
             return;
         }
         if ($("input[name=pick-one]:checked").val() === questionSet[i-1].answer) {
